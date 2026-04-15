@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+}
+/* Contenedor principal */
+/* --- Contenedor Principal --- */
+.galery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Evita que crezca hasta el infinito en PC */
+    margin: 40px auto;
+    padding: 20px 0; /* Espacio para que el efecto hover no se corte */
+}
+
+/* --- Estilo base idéntico para todas las imágenes --- */
+.galery-item {
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+    flex-shrink: 0; /* Obliga a flexbox a respetar el tamaño exacto */
+}
+
+/* --- PANTALLAS PEQUEÑAS (iPhone, Móviles) --- */
+@media (max-width: 767px) {
+    .galery-item {
+        /* Todas miden exactamente el 50% de la pantalla */
+        width: 50%; 
+        aspect-ratio: 3 / 4; /* Formato retrato (más altas que anchas) */
+    }
+    
+    /* La magia matemática: 50% (izq) - 25% (margen) + 50% (centro) - 25% (margen) + 50% (der) = 100% exacto */
+    .galery-item:nth-child(1) {
+        z-index: 3;
+        margin-right: -25%; 
+    }
+    .galery-item:nth-child(2) {
+        z-index: 2;
+    }
+    .galery-item:nth-child(3) {
+        z-index: 1;
+        margin-left: -25%;
+    }
+}
+
+/* --- PANTALLAS GRANDES (iPad Mini, Desktop) --- */
+@media (min-width: 768px) {
+    .galery-item {
+        /* 1. EL ANCHO: Lo subimos al 55% para que sean mucho más grandes */
+        width: 55%; 
+        
+        /* 2. LA ALTURA: Usamos una proporción cuadrada o casi cuadrada. 
+           1/1 las hará perfectas para llenar esa caja verde hacia abajo. */
+        aspect-ratio: 1 / 1; 
+    }
+    
+    /* 3. LA SUPERPOSICIÓN: Como son más grandes, necesitamos "encimarlas" 
+       un poco más para que no se salgan del 100% de la pantalla. */
+    .galery-item:nth-child(1) {
+        z-index: 3;
+        margin-right: -30%; /* Aumentamos el margen negativo */
+    }
+    .galery-item:nth-child(2) {
+        z-index: 2;
+    }
+    .galery-item:nth-child(3) {
+        z-index: 1;
+        margin-left: -30%; /* Aumentamos el margen negativo */
+    }
+}
+
+/* --- Efectos Hover --- */
+.galery-item:hover {
+    transform: scale(1.1) translateY(-30px) !important;
+    z-index: 4 !important;
+    filter: grayscale(0%);
+}
+
+.galery-item:not(:hover) {
+    filter: grayscale(100%);
+}

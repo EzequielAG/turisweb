@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Turisweb Hidalgo</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--Atlantes de tula-->
+        <link rel="stylesheet" href="css/ejem5.css" />
+        <!--Mineral-->
+        <link rel="stylesheet" href="css/Mineral.css"/>
+        <!--nav-->
+        <link rel="stylesheet" href="css/nav.css"/>
+        <link rel="stylesheet" href="css/Stylesch.css">
+        <link rel="stylesheet" href="css/carrucelParque.css" />
+        <link rel="stylesheet" href="css/Carousel.css" />
+
+        <script src="js/chat.js"></script>
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5GMTRBSD');</script>
+<!-- End Google Tag Manager -->
+
+<style>
+            /* Asegura que el masthead tenga una altura definida y posición relativa */
+            .masthead {
+                position: relative;
+                width: 100%;
+                height: 100vh; /* O la altura que desees para tu sección de cabecera */
+                overflow: hidden; /* Para que las imágenes del carrusel no se salgan */
+                display: flex; /* Para centrar el contenido textual */
+                align-items: center; /* Centrado vertical */
+                justify-content: center; /* Centrado horizontal */
+            }
+
+            /* Estilos para el carrusel de fondo */
+            .masthead-carousel {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1; /* Detrás del contenido textual */
+            }
+
+            .masthead-carousel .carousel-inner,
+            .masthead-carousel .carousel-item,
+            .masthead-carousel .carousel-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+            }
+
+            /* Ajusta la posición del contenido textual para que esté por encima del carrusel */
+            .masthead .container {
+                position: relative;
+                z-index: 2; /* Por encima del carrusel */
+                color: white; /* Asegura que el texto sea visible */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+            }
+
+            /* Opcional: Estilos para oscurecer las imágenes y mejorar la legibilidad del texto */
+            .masthead-carousel::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5); /* Oscurecimiento */
+                z-index: 1; /* Entre las imágenes y el texto */
+            }
+
+            /* Auth Buttons */
+            #loginLink {
+                background: linear-gradient(135deg, #188262 0%, #0f7a4d 100%) !important;
+                color: white !important;
+                margin-top: 10px !important;
+                padding: 10px 20px !important;
+                border-radius: 8px !important;
+                text-decoration: none !important;
+                font-weight: 700 !important;
+                font-size: 14px !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                transition: all 0.3s ease !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                box-shadow: 0 4px 12px rgba(24, 130, 98, 0.3) !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.5px !important;
+            }
+
+            #loginLink:hover {
+                background: linear-gradient(135deg, #0f7a4d 0%, #06522f 100%) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 16px rgba(24, 130, 98, 0.4) !important;
+                color: white !important;
+            }
+
+            #loginLink:active {
+                transform: translateY(0) !important;
+            }
+
+            #logoutBtn {
+                background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+                margin-top: 10px !important;
+                color: white !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                height: 45px !important;
+                padding: 5px 20px !important;
+                border-radius: 8px !important;
+                cursor: pointer !important;
+                font-weight: 700 !important;
+                font-size: 12px !important;
+                transition: all 0.3s ease !important;
+                box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3) !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.5px !important;
+            }
+
+            #logoutBtn:hover {
+                background: linear-gradient(135deg, #c0392b 0%, #a93226 100%) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4) !important;
+            }
+
+            #adminLink {
+                color: #188262 !important;
+                background: rgba(24, 130, 98, 0.1) !important;
+                font-weight:700 !important;
+                text-decoration: none !important;
+                padding: 6px 12px !important;
+                border: 1px solid #188262 !important;
+                border-radius: 6px !important;
+                transition: all 0.3s ease !important;
+            }
+
+            #adminLink:hover {
+                background: rgba(24, 130, 98, 0.1) !important;
+                color: #0f7a4d !important;
+            }
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GMTRBSD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#page-top">Hidalgo te espera...</a>
+        <a href=""><img class="logo-brand" src="assets/img/Turisin1.png " alt="..." /></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- Auth Buttons -->
+        <div id="navAuthButtons" style="margin-left: auto; margin-right: auto; display: flex; gap: 10px; align-items: center;">          
+            <a id="loginLink" href="login.html" style="display: none;"><i class="fas fa-lock"></i> Login</a>
+            <span id="userNameDisplay" style="height: 45px; 
+            font-size: 14px; 
+            color: #ffffff; 
+            font-weight: 600; 
+            margin-top: 10px !important;
+            background: linear-gradient(135deg, #188262 0%, #188262 100%);
+            padding: 10px 20px !important;
+            border-radius: 8px !important;
+            text-decoration: none !important;
+            font-weight: 700 !important;
+            font-size: 15px !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            box-shadow: 0 4px 12px rgba(24, 130, 98, 0.3) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            "></span>
+            <a id="adminLink" href="admin.html" style="display: none;">Admin</a>
+            <button id="logoutBtn" onclick="handleLogout()" style="display: none;"></button>
+        </div>
+
+         <!--Aqui termina div chat chat--><!--Aqui empieza chat-->
+                    <div class="chatbot-avatar" id="chatbot-avatar"></div>
+                        <div class="chatbot-container" id="chatbot-container">
+                            <iframe src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/06/18/20250806183547-91FRAX86.json" width="100%" height="100%"></iframe>
+                    </div>
+                             
+                    <!--Aqui termina div chat chat-->
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown" data-bs-auto-close="outside">
+                    <a class="nav-link dropdown-toggle custom-dropdown-toggle" id="navbarDropdown" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Más municipios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="./Pachuca Nuevo/index2.html">Pachuca</a></li>
+                        <li><a class="dropdown-item" href="./Chapulhuacán_Web2/index4.html">Chapulhuacán</a></li>
+                        <li><a class="dropdown-item" href="./LA MISION/index6.html">La Misión</a></li>
+                        <li><a class="dropdown-item" href="./Ixmiquiplan/index3.html">Ixmiquilpan</a></li>
+                        <li><a class="dropdown-item" href="./Tula de Allende/index5.html">Tula de Allende</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div id="mastheadCarousel" class="carousel slide masthead-carousel" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/img/carr1.jpeg" class="d-block w-100" alt="Fondo de Hidalgo 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/carr2.jpeg" class="d-block w-100" alt="Fondo de Hidalgo 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/carr3.jpeg" class="d-block w-100" alt="Fondo de Hidalgo 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/carr4.jpeg" class="d-block w-100" alt="Fondo de Hidalgo 4">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#mastheadCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mastheadCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">Hidalgo</h1>
+                        <h2 class="text-white-50 mx-auto mt-2 mb-5">Un Estado lleno de riqueza cultural, además de pueblos mágicos que te encantará conocer.</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- About-->
+        <section class="about-section text-center" id="about">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">Naturaleza, Cultura y Sabor en un Solo Destino</h2>
+                        <p class="text-white-50">
+                            Hidalgo es un Estado rico en cultura, historia y naturaleza, ofreciendo una diversidad de atractivos turísticos 
+                            para todos los gustos.
+                            
+                            Conocido por sus impresionantes paisajes naturales y su vibrante legado histórico, el Estado  invita a los visitantes a explorar
+                            antiguas haciendas, pueblos mágicos y sitios arqueológicos que relatan la herencia prehispánica y colonial de la región. 
+                        <br>
+                            <a href="https://youtu.be/bIGt-ueYHik?si=TnedjtQabiRYCna1">¿Qué hacer en Hidalgo?</a>
+                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Projects-->
+        <section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5">
+                <!-- Featured Project Row-->
+                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+                    <div class="col-xl-8 col-lg-6">
+                        <div class="card" id="card1">
+                            <div class="face front">
+                                <img class="img-fluid mb-3 mb-lg-0" src="assets/img/WhatsApp Image 2025-11-23 at 5.20.57 PM.jpeg" alt="..." />
+                                <h4 class="text-white">Real del Monte</h4>
+                            </div>
+                            <div class="face back">
+                                <h4>Real del Monte</h4>
+                                <p>El nombre "Real del Monte" proviene de la época colonial, cuando la región estaba bajo el dominio de la Corona española ("Real") y se encontraba rodeada de montes ("Monte").
+                                </p>
+                                <div class="link">
+                                    <a href="a">En 2004, Real del Monte fue incorporado al programa Pueblos Mágicos de México</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="featured-text text-center text-lg-left p-lg-5">
+                            <h4>Real del Monte</h4>
+                            <p class="text-black-50 mb-0">Real del Monte, oficialmente conocido como Mineral del Monte, es un pueblo mágico ubicado en el estado de Hidalgo, México, a solo 12 km de la capital del estado, Pachuca de Soto, y en el corredor de la Montaña.
+ Este destino turístico destaca por su rica historia minera, su arquitectura colonial y sus calles adoquinadas en cascada, rodeado de colinas y con un clima frío debido a su altitud de 2712 metros sobre el nivel del mar.
+                            <br>
+                           Entre las principales atracciones se encuentra la visita al Centro Histórico, donde puedes pasear por sus calles adoquinadas y admirar edificios como la Parroquia de la Señora de la Asunción, construida a finales del siglo XVII, o la Iglesia del Rosario, con su torre característica construida por la colonia inglesa.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project One Row-->
+                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                    <div class="col-lg-6 w-100">
+                        <div class="bg-black text-center w-100 h-100 project p-4 p-lg-5">
+                            <div class="d-flex w-100 h-100">
+                                <div class="project-text w-100 my-auto text-center text-lg-left p-4 p-lg-5">
+                                    <h4 class="text-white">Huasca de Ocampo </h4>
+                                    <p class="mb-0 text-white-50">
+                                        Primer Pueblo Mágico de México, destacado por sus increíbles paisajes naturales, lugares históricos, hermosas vistas,
+                                         calles empedradas, paseos románticos, haciendas coloniales,
+                                          lugares mágicos, donde se combinan lo hecho por el hombre y la obra de la naturaleza, creando una imagen agradable
+                                           y acogedora para pasar unos días de verdadero descanso en esta pintoresca provincia.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Project One Row Gallery -->
+                <div class="row gx-0 mb-5 justify-content-center">
+                    <div class="col-12 px-2">
+                        <div class="carrusel-contenedor">
+                            <div class="carrusel-pista" id="pista">
+                                <div class="carrusel-slide">
+                                <img src="assets/img/cari1.jpeg" alt="1">
+                                </div>
+                                <div class="carrusel-slide">
+                                <img src="assets/img/cari2.webp" alt="2">
+                                </div>
+                                <div class="carrusel-slide">
+                                <img src="assets/img/cari3.webp" alt="3"> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Two Row-->
+                <div class="row gx-0 justify-content-center">
+                    <div class="col-lg-6 order-lg-first w-100">
+                        <div class="bg-black text-center w-100 h-100 project p-4 p-lg-5">
+                            <div class="d-flex h-30">
+                                <div class="project-text w-100 my-auto text-center text-lg-right p-4 p-lg-5">
+                                    <h4 class="text-white">Los Atlantes de Tula</h4>
+                                    <p class="mb-0 text-white-50">Los atlantes de Tula son cuatro figuras antropomorfas, pertenecientes a la cultura tolteca, que se encuentran sobre la Pirámide B, en la zona arqueológica de Tula, Estado de Hidalgo, México, también denominada como Tollan-Xicocotitlan.
+                                        Este espacio esta creado con el fin de ofrecer una mayor oferta cultural y contenidos novedosos, el área arqueológica de Tula, Hidalgo; presenta exposiciones y recorridos temporales 
+                                        que revelan la historia, los objetos y la cultura de los atlantes de Tula. 
+                                    </p>
+                                    <p class="mb-0 text-white-50">¡Qué esperas para visitarlos!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 galery">
+                     <img src="assets/img/atlante2.jpg" class="galery-item" alt="..." >
+                     <img src="assets/img/atlante1.jpg" class="galery-item" alt="..." >
+                     <img src="assets/img/atlante3.jpg" class="galery-item" alt="..." >
+                </div>
+            </div>
+        </section>
+        <!-- Signup-->
+        <section class="signup-section" id="signup">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                        <h2 class="text-white mb-5">¡Suscríbete para recibir más notificaciones!</h2>
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <!-- Email address input-->
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
+                                <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">¡Notificarme!</button></div>
+                            </div>
+                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">¡Se requeire un correo electrónico!</div>
+                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">El correo electrónico es invalido</div>
+                            <!-- Submit success message-->
+                            <!---->
+                            <!-- This is what your users will see when the form-->
+                            <!-- has successfully submitted-->
+                            <div class="d-none" id="submitSuccessMessage">
+                                <div class="text-center mb-3 mt-2 text-white">
+                                    <div class="fw-bolder">Form submission successful!</div>
+                                    To activate this form, sign up at
+                                    <br />
+                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                </div>
+                            </div>
+                            <!-- Submit error message-->
+                            <!---->
+                            <!-- This is what your users will see when there is-->
+                            <!-- an error submitting the form-->
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error al enviar mensaje</div></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact-->
+        <section class="contact-section bg-black">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Dirección secretaria de turismo Hidalgo</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small text-black-50">Camino Real de La Plata 340, Zona Plateada, 42084 Pachuca de Soto, Hgo., México</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Correo electrónico de secretaria de turismo Hidalgo</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small text-black-50"><a href="#!">http://www.s-turismo.hidalgo.gob.mx/</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Teléfono de contacto secretaria de turismo Hidalgo</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small text-black-50">+527717184489</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social d-flex justify-content-center">
+                    <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                    <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                    <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Your Website 2023</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- Auth JS -->
+        <script src="js/auth.js"></script>
+        <!-- Authentication Handler -->
+        <script src="js/carrousel.js"></script>
+ |       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const user = getCurrentUser();
+                const userNameDisplay = document.getElementById('userNameDisplay');
+                const adminLink = document.getElementById('adminLink');
+                const logoutBtn = document.getElementById('logoutBtn');
+                const loginLink = document.getElementById('loginLink');
+
+                if (user) {
+                    // Usuario autenticado
+                    userNameDisplay.textContent = `${user.Nombre}`;
+                    userNameDisplay.style.display = 'inline';
+                    logoutBtn.textContent = 'Cerrar Sesión';
+                    logoutBtn.style.display = 'block';
+                    loginLink.style.display = 'none';
+
+                    if (user.role === 'admin') {
+                        adminLink.style.display = 'inline';
+                    }
+                } else {
+                    // Usuario no autenticado
+                    userNameDisplay.style.display = 'none';
+                    adminLink.style.display = 'none';
+                    logoutBtn.style.display = 'none';
+                    loginLink.style.display = 'block';
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            // 1. Obtenemos los elementos
+            const loginLink = document.getElementById('loginLink');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const adminLink = document.getElementById('adminLink');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Veremos en la consola qué está pasando
+            console.log("¿Está logueado?:", isAuthenticated());
+            if (isAuthenticated()) {
+                console.log("Datos del usuario:", getCurrentUser());
+            }
+
+            if (isAuthenticated()) {
+                const user = getCurrentUser(); 
+                
+                // 2. OCULTAR LOGIN 
+                if (loginLink) {
+                    loginLink.style.setProperty('display', 'none', 'important');
+                }
+
+                // 3. MOSTRAR DATOS DEL USUARIO
+                if (userNameDisplay) {
+                    userNameDisplay.style.setProperty('display', 'inline-flex', 'important');
+                    // Intentamos leer su nombre
+                    const nombreMostrar = user.Nombre;
+                    userNameDisplay.innerHTML = `<i class="fas fa-user"></i> ${nombreMostrar}`;
+                }
+
+                // 4. MOSTRAR BOTÓN CERRAR SESIÓN
+                if (logoutBtn) {
+                    logoutBtn.style.setProperty('display', 'inline-block', 'important');
+                }
+
+                if (isAdmin() && adminLink) {
+                    adminLink.style.setProperty('display', 'inline-block', 'important');
+                }
+
+            } else {
+                // SI NO HAY SESIÓN:
+                if (loginLink) {
+                    loginLink.style.setProperty('display', 'inline-flex', 'important'); 
+                }
+                
+                if (userNameDisplay) userNameDisplay.style.setProperty('display', 'none', 'important');
+                if (adminLink) adminLink.style.setProperty('display', 'none', 'important');
+                if (logoutBtn) logoutBtn.style.setProperty('display', 'none', 'important');
+            }
+        });
+        </script>
+        
+    </body>
+</html>

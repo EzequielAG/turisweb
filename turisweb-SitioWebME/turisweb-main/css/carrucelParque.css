@@ -1,0 +1,76 @@
+#carouselParqueChico img {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    #carouselParqueChico img {
+        height: 250px;
+    }
+}
+
+/* Carrusel principal en Project One Row */
+#carouselParque .carousel-item img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 18px;
+    transition: transform 0.5s ease;
+}
+
+#carouselParque:hover .carousel-item.active img {
+    transform: scale(1.03);
+}
+
+/* Galería Project One Row - efecto zoom al pasar cursor */
+.project-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.project-gallery-item {
+    flex: 0 0 23%;
+    min-width: 200px;
+    height: 250px;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+    cursor: pointer;
+    scroll-snap-align: center;
+    transform: scale(0.95);
+    opacity: 0.86;
+}
+
+.project-gallery:hover .project-gallery-item {
+    transform: scale(0.85);
+    opacity: 0.75;
+}
+
+.project-gallery-item:hover {
+    transform: scale(1.2);
+    opacity: 1;
+    z-index: 5;
+    filter: saturate(1.1);
+}
+
+@media (max-width: 992px) {
+    .project-gallery-item { flex: 0 0 30%; min-width: 170px; height: 220px; }
+}
+
+@media (max-width: 768px) {
+    .project-gallery { gap: 0.6rem; }
+    .project-gallery-item { flex: 0 0 45%; min-width: 150px; height: 200px; }
+}
+
+@media (max-width: 576px) {
+    .project-gallery { gap: 0.5rem; }
+    .project-gallery-item { flex: 0 0 80%; min-width: 250px; height: 190px; }
+}

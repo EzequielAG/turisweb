@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - Turisweb</title>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+
+</head>
+<body>
+    <div class="admin-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-tachometer-alt"></i> Turisweb Admin
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link active" data-section="dashboard" onclick="navigateTo('dashboard')">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a class="nav-link" data-section="crear-lugar" onclick="navigateTo('crear-lugar')">
+                    <i class="fas fa-plus"></i>
+                    <span>Crear Lugar</span>
+                </a>
+                <a class="nav-link" data-section="lugares" onclick="navigateTo('lugares')">
+                    <i class="fas fa-map-marked"></i>
+                    <span>Lugares</span>
+                </a>
+                <a class="nav-link" data-section="servicios" onclick="navigateTo('servicios')">
+                    <i class="fas fa-tasks"></i>
+                    <span>Servicios Pendientes</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-name" id="adminUserName">Hola, Admin</div>
+                </div>
+                <button class="btn-logout" onclick="handleLogoutClick()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="header">
+                <h1 class="header-title">Panel de Control</h1>
+                <div class="header-info">
+                    <a href="index.html" class="header-link">Ver Sitio</a>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- DASHBOARD SECTION -->
+                <section id="dashboardSection" class="section active">
+                    <div class="section-title">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </div>
+
+                    <div class="metricas-grid" id="metricasContainer">
+                        <!-- Métricas cargadas dinámicamente -->
+                    </div>
+
+                    <!-- Acciones rápidas (igual que app móvil) -->
+                    <div class="section-title">
+                        <i class="fas fa-bolt"></i>
+                        Acciones Rápidas
+                    </div>
+                    <div class="acciones-rapidas" id="accionesRapidasContainer">
+                        <div class="accion-rapida-btn" onclick="navigateTo('crear-lugar')">
+                            <div class="accion-icon-wrap" style="background-color:#18826220;color:#188262"><i class="fas fa-plus"></i></div>
+                            <div class="accion-rapida-text">Nuevo Lugar</div>
+                            <div class="ver-todos-link"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="accion-rapida-btn" onclick="navigateTo('lugares')">
+                            <div class="accion-icon-wrap" style="background-color:#007AFF20;color:#007AFF"><i class="fas fa-list"></i></div>
+                            <div class="accion-rapida-text">Ver Todos</div>
+                            <div class="ver-todos-link"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="accion-rapida-btn" onclick="(async ()=>{await adminManager && adminManager.cargarMetricas(); await adminManager && adminManager.cargarLugaresRecientes(); renderMetricas(); renderLugaresRecientes();})()">
+                            <div class="accion-icon-wrap" style="background-color:#f39c1220;color:#f39c12"><i class="fas fa-sync-alt"></i></div>
+                            <div class="accion-rapida-text">Actualizar Datos</div>
+                            <div class="ver-todos-link"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="accion-rapida-btn" onclick="navigateTo('servicios')">
+                            <div class="accion-icon-wrap" style="background-color:#f39c1220;color:#f39c12"><i class="fas fa-check-square"></i></div>
+                            <div class="accion-rapida-text">Revisar Servicios</div>
+                            <div class="ver-todos-link"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">
+                        <i class="fas fa-history"></i>
+                        Lugares Recientes
+                    </div>
+
+                    <div class="lugares-list" id="lugaresRecentesContainer">
+                        <!-- Lugares cargados dinámicamente -->
+                    </div>
+                </section>
+
+                <!-- CREAR LUGAR SECTION -->
+                <section id="crearLugarSection" class="section">
+                    <div class="section-title">
+                        <i class="fas fa-plus"></i>
+                        Crear Nuevo Lugar
+                    </div>
+
+                    <style>
+                        .pills { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+                        .pill { padding:8px 12px; background:#34495e; color:#fff; border-radius:999px; cursor:pointer; border:1px solid transparent; font-weight:700; }
+                        .pill.active { background:#188262; border-color:#0f7a4d; }
+                        #previewCard { margin-top:18px; max-width:420px; }
+                        #previewCard .lugar-card { margin:0; }
+                        #contadorDesc { font-size:12px; color:#cbd5da; float:right; }
+                        .small-inputs { display:flex; gap:8px; }
+                        .small-inputs input { flex:1; }
+                    </style>
+
+                    <form id="crearLugarForm" onsubmit="handleCrearLugar(event)" style="max-width: 720px;">
+                        <input type="hidden" id="lugarId" />
+
+                        <div class="form-group">
+                            <label for="lugarNombre">Nombre del Lugar</label>
+                            <input type="text" id="lugarNombre" placeholder="Ej: Museo de Minería" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <div class="pills" id="categoriaPills">
+                                <div class="pill" data-value="Historia">Historia</div>
+                                <div class="pill" data-value="Gastronomía">Gastronomía</div>
+                                <div class="pill" data-value="Playas">Playas</div>
+                            </div>
+                            <select id="lugarCategoria" required style="margin-top:8px;">
+                                <option value="">Seleccionar categoría</option>
+                                <option value="Historia">Historia</option>
+                                <option value="Gastronomía">Gastronomía</option>
+                                <option value="Playas">Playas</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Municipio</label>
+                            <div class="pills" id="municipioPills">
+                                <div class="pill" data-value="Pachuca">Pachuca</div>
+                                <div class="pill" data-value="Tula de Allende">Tula de Allende</div>
+                                <div class="pill" data-value="Ixmiquilpan">Ixmiquilpan</div>
+                                <div class="pill" data-value="Chapulhuacán">Chapulhuacán</div>
+                                <div class="pill" data-value="La Misión">La Misión</div>
+                            </div>
+                            <select id="lugarMunicipio" required style="margin-top:8px;">
+                                <option value="">Seleccionar municipio</option>
+                                <option value="Pachuca">Pachuca</option>
+                                <option value="Tula de Allende">Tula de Allende</option>
+                                <option value="Ixmiquilpan">Ixmiquilpan</option>
+                                <option value="Chapulhuacán">Chapulhuacán</option>
+                                <option value="La Misión">La Misión</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lugarDescripcionShort">Descripción Corta <span id="contadorDesc">0</span></label>
+                            <textarea id="lugarDescripcionShort" maxlength="160" placeholder="Resumen breve para listado (máx 160)" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lugarDescripcion">Descripción Completa</label>
+                            <textarea id="lugarDescripcion" placeholder="Describe el lugar con detalle..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageUrl">Imagen (URL)</label>
+                            <input type="text" id="imageUrl" placeholder="https://.../imagen.jpg" />
+                            <div style="margin-top:8px; display:flex; gap:8px; align-items:center;">
+                                <button type="button" class="btn btn-secondary" id="btnPreviewImage">Vista Previa</button>
+                                <div id="previewImageWrap" style="width:100px;height:70px;border-radius:8px;overflow:hidden;background:#1f2a33;border:1px solid #34495e;display:flex;align-items:center;justify-content:center;color:#95a5a6;font-size:12px;">No image</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Activo</label>
+                            <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+                                <input type="checkbox" id="lugarActivo" checked /> <label for="lugarActivo" style="margin:0;color:#cbd5da;font-weight:700;">Visible</label>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Guardar Lugar
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="(function(){document.getElementById('crearLugarForm').reset(); navigateTo('dashboard');})()">
+                                <i class="fas fa-times"></i>
+                                Cancelar
+                            </button>
+                        </div>
+
+                        <div id="previewCard">
+                            <div class="lugar-card">
+                                <div class="lugar-color-bar" style="background-color:#188262"></div>
+                                <div class="lugar-info">
+                                    <div class="lugar-nombre" id="previewNombre">Nombre del Lugar</div>
+                                    <div class="lugar-meta">
+                                        <span class="categoria-badge" id="previewCategoria" style="background-color:#18826220;color:#188262">Categoría</span>
+                                        <span class="municipio" id="previewMunicipio">Municipio</span>
+                                    </div>
+                                    <div class="lugar-fecha" id="previewFecha">Hoy</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- LUGARES SECTION -->
+                <section id="lugaresSection" class="section">
+
+                    <div class="lugares-header">
+                        <div class="search-bar">
+                            <input type="text" id="searchLugaresInput" placeholder="Buscar lugar..." />
+                        </div>
+                        <button class="btn-nuevo" onclick="navigateTo('crear-lugar')">
+                            <i class="fas fa-plus"></i>
+                            Nuevo
+                        </button>
+                    </div>
+
+                    <div class="categoria-pills" id="categoriaPillsFilter">
+                        <button class="categoria-pill active" data-categoria="">Todos</button>
+                        <button class="categoria-pill" data-categoria="Cultural">Cultural</button>
+                        <button class="categoria-pill" data-categoria="Naturaleza">Naturaleza</button>
+                        <button class="categoria-pill" data-categoria="Infraestructura">Infraestructura</button>
+                        <button class="categoria-pill" data-categoria="Historia">Historia</button>
+                        <button class="categoria-pill" data-categoria="Gastronomía">Gastronomía</button>
+                    </div>
+
+                    <div class="lugares-count" id="lugaresCount">0 lugares</div>
+
+                    <div class="lugares-list" id="lugaresCompleteContainer">
+                        <!-- Todos los lugares cargados dinámicamente -->
+                    </div>
+                </section>
+
+                <!-- SERVICIOS SECTION -->
+                <section id="serviciosSection" class="section">
+                    <div class="section-title">
+                        <i class="fas fa-tasks"></i>
+                        Revisión de Servicios
+                    </div>
+
+                    <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
+                        <button id="tabPendientes" class="btn btn-primary" style="background:#34495e; border-radius:20px; padding:8px 14px;" onclick="switchServiciosTab('pendientes')">Pendientes</button>
+                        <button id="tabTodos" class="btn btn-primary" style="background:#188262; border-radius:20px; padding:8px 14px;" onclick="switchServiciosTab('todos')">Todos</button>
+                    </div>
+
+                    <div id="serviciosWrapper" style="margin-top:18px;">
+                        <div id="serviciosPendientesContainer"></div>
+                        <div id="serviciosTodosContainer" style="display:none;"></div>
+                    </div>
+                </section>
+            </div>
+            <!-- Indicador de sincronización similar a app móvil -->
+            <div style="padding: 0 30px 30px 30px;">
+                <div class="realtime-indicator">
+                    <div class="realtime-pulse"><div class="realtime-dot"></div></div>
+                    <div class="realtime-text">Sincronización en tiempo real activa</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/admin-page.js"></script>
+</body>
+</html>

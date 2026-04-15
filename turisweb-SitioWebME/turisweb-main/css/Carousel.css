@@ -1,0 +1,27 @@
+/* Contenedor principal ("la ventana") */
+.carrusel-contenedor {
+  width: 100%;
+  max-width: 800px; /* Límite máximo en PC, en móviles será 100% */
+  margin: 0 auto;   /* Centrar en la pantalla */
+  overflow: hidden; /* Oculta las imágenes que están fuera del área */
+  border-radius: 10px; 
+}
+
+/* La cinta que contiene todas las imágenes */
+.carrusel-pista {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* deslizamiento suave */
+}
+
+/* Cada imagen individual */
+.carrusel-slide {
+  min-width: 100%; /* Obliga a cada imagen a ocupar el ancho total del contenedor */
+  box-sizing: border-box;
+}
+
+.carrusel-slide img {
+  width: 100%;
+  display: block;
+  object-fit: cover; /* Evita que la imagen se estire*/
+  aspect-ratio: 16/9; /* Mantiene una relación de aspecto consistente */
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>TurisWeb | Servicios en La Misión</title>
+
+    <link rel="shortcut icon" href="images/favicon.png" type="" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/servicios.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header class="tw-topbar">
+      <div class="tw-topbar__inner">
+        <a class="tw-back" href="index6.html">
+          <span class="tw-back__chev" aria-hidden="true">‹</span>
+          <span>Volver</span>
+        </a>
+
+        <div class="tw-topbar__title">
+          <div class="tw-topbar__title-main">Servicios en La Misión</div>
+          <div class="tw-topbar__title-sub">Explora lugares y establecimientos cerca de ti</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="tw-main">
+      <!-- Vista: Lista -->
+      <section id="view-list" class="tw-view tw-view--active">
+        <div class="tw-container">
+          <div class="tw-question">¿Qué necesitas hoy?</div>
+
+          <div class="tw-pills" role="tablist" aria-label="Filtros de categoría">
+            <button type="button" class="tw-pill is-active" data-category="Todos">
+              <span class="tw-pill__icon" aria-hidden="true">★</span> Todos
+            </button>
+            <button type="button" class="tw-pill" data-category="Comida">
+              <span class="tw-pill__icon" aria-hidden="true">🍽️</span> Comida
+            </button>
+            <button type="button" class="tw-pill" data-category="Hospedaje">
+              <span class="tw-pill__icon" aria-hidden="true">🏨</span> Hospedaje
+            </button>
+            <button type="button" class="tw-pill" data-category="Transporte">
+              <span class="tw-pill__icon" aria-hidden="true">🚕</span> Transporte
+            </button>
+            <button type="button" class="tw-pill" data-category="Artesanías">
+              <span class="tw-pill__icon" aria-hidden="true">🧶</span> Artesanías
+            </button>
+          </div>
+
+          <div class="tw-results">RESULTADOS (<span id="resultsCategory">TODOS</span>)</div>
+
+          <div id="servicesList" class="tw-list" aria-live="polite"></div>
+        </div>
+
+        <div class="tw-bottom">
+          <div class="tw-bottom__inner">
+            <button id="openRegister" type="button" class="tw-cta">
+              + Registrar un Nuevo Servicio
+            </button>
+            <div class="tw-bottom__hint">
+              ¿Eres dueño de un negocio?
+              <button id="openRegisterHint" type="button" class="tw-linklike">Regístralo aquí.</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vista: Registro -->
+      <section id="view-form" class="tw-view">
+        <div class="tw-container tw-formwrap">
+          <form id="serviceForm" novalidate>
+            <div class="tw-field">
+              <label class="tw-label" for="svcName">Nombre del Servicio o Negocio</label>
+              <input id="svcName" name="name" class="tw-input" type="text" placeholder="Ej. Cabañas Sierra Gorda" required />
+              <div class="tw-invalid">Escribe el nombre del servicio.</div>
+            </div>
+
+            <div class="tw-field">
+              <label class="tw-label" for="svcShort">Descripción Breve</label>
+              <textarea id="svcShort" name="short" class="tw-input tw-textarea" rows="3" placeholder="¿Qué hace especial a este lugar?" required></textarea>
+              <div class="tw-invalid">Agrega una descripción breve.</div>
+            </div>
+
+            <div class="tw-field">
+              <label class="tw-label" for="svcDetails">Descripción Detallada</label>
+              <textarea
+                id="svcDetails"
+                name="details"
+                class="tw-input tw-textarea"
+                rows="4"
+                placeholder="Proporciona una descripción más completa para los turistas interesados."
+              ></textarea>
+            </div>
+
+            <div class="tw-field">
+              <label class="tw-label" for="svcPhone">Teléfono de Contacto</label>
+              <input id="svcPhone" name="phone" class="tw-input" inputmode="tel" type="tel" placeholder="Ej. 7741234567" />
+            </div>
+
+            <div class="tw-field">
+              <label class="tw-label" for="svcWhatsapp">WhatsApp de Contacto</label>
+              <input id="svcWhatsapp" name="whatsapp" class="tw-input" inputmode="tel" type="tel" placeholder="Ej. 7741234567" />
+            </div>
+
+            <div class="tw-field">              <label class="tw-label" for="svcHorario">Horario de Atención</label>
+              <input id="svcHorario" name="horario" class="tw-input" type="text" placeholder="Ej. 08:00 - 20:00" />
+            </div>
+
+            <div class="tw-field">              <label class="tw-label" for="svcCategory">Categoría</label>
+              <select id="svcCategory" name="category" class="tw-input" required>
+                <option value="" selected disabled>Selecciona una categoría</option>
+                <option value="Comida">Comida</option>
+                <option value="Hospedaje">Hospedaje</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Artesanías">Artesanías</option>
+              </select>
+              <div class="tw-invalid">Selecciona una categoría.</div>
+            </div>
+
+            <div class="tw-field">
+              <div class="tw-label">Rango de Precios</div>
+              <div class="tw-price" role="group" aria-label="Rango de precios">
+                <input class="tw-price__radio" type="radio" id="price1" name="price" value="$" required />
+                <label class="tw-price__btn" for="price1">$</label>
+
+                <input class="tw-price__radio" type="radio" id="price2" name="price" value="$$" required />
+                <label class="tw-price__btn" for="price2">$$</label>
+
+                <input class="tw-price__radio" type="radio" id="price3" name="price" value="$$$" required />
+                <label class="tw-price__btn" for="price3">$$$</label>
+              </div>
+              <div class="tw-invalid">Selecciona un rango de precios.</div>
+            </div>
+
+            <button id="saveService" type="submit" class="tw-save">
+              Guardar Servicio
+            </button>
+
+            <button id="cancelForm" type="button" class="tw-cancel">
+              Cancelar / Volver a Servicios
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal: Registro Exitoso -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content tw-modal">
+          <div class="tw-modal__icon" aria-hidden="true">
+            <div class="tw-check">✓</div>
+          </div>
+          <div class="tw-modal__title">¡Solicitud Enviada!</div>
+          <div class="tw-modal__text">Su solicitud ha sido enviada y está pendiente de aprobación por el administrador.</div>
+          <button id="successOk" type="button" class="tw-modal__btn" data-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Detalle -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content tw-detail">
+          <div class="tw-detail__body">
+            <div class="tw-detail__title" id="detailTitle">Servicio</div>
+            <div class="tw-detail__img" id="detailImg" role="img" aria-label="Imagen del servicio"></div>
+            <div class="tw-detail__label">Descripción del lugar:</div>
+            <div class="tw-detail__text" id="detailText"></div>
+
+            <div class="tw-detail__actions">
+              <a id="detailCall" class="tw-action tw-action--call" href="#" role="button">
+                <i class="fa fa-phone" aria-hidden="true"></i> Llamar
+              </a>
+              <a
+                id="detailWa"
+                class="tw-action tw-action--wa"
+                href="#"
+                role="button"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa fa-whatsapp" aria-hidden="true"></i> WhatsApp
+              </a>
+            </div>
+
+            <button type="button" class="tw-detail__close" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="js/servicios-la-mision.js"></script>
+  </body>
+</html>
+

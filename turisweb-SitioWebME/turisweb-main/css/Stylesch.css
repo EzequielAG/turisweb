@@ -1,0 +1,56 @@
+/* Estilos para el avatar flotante (modificado) */
+.chatbot-avatar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    
+    /* Propiedades para la imagen de fondo */
+    background-image: url('Pregun.png');
+    background-size: 70%; /* Ajusta la imagen para que cubra todo el div */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+
+    background-color: white;
+
+}
+
+/* Estilos para la imagen del avatar */
+.chatbot-avatar .avatar-image {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* El resto del CSS sigue igual */
+.chatbot-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    max-width: 350px;
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.chatbot-container.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
